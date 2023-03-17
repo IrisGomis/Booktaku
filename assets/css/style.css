@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: linear-gradient(
+        to right,
+        rgba(255, 0, 251, 0.5),
+        rgb(255, 255, 255)
+        );
+}
+
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    color: #810081;
+}
+
+.user-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 30%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.user-form form input {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-form form input[type=text],
+.user-form form input[type=email],
+.user-form form input[type=password]{
+    padding: 8px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    transition: 3s;
+}
+
+.user-form form input[type=text]:focus,
+.user-form form input[type=email]:focus,
+.user-form form input[type=password]:focus{
+    border-color: #df5ad8;
+    box-shadow: 0 0 6px #df5ad8;
+}
+
+.user-form form input[type=submit]{
+    border: none;
+    padding: 12px 50px;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff;
+    color: black;
+    border: 2px solid #df5ad8;
+}
+
