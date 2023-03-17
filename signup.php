@@ -10,6 +10,7 @@ if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['pass
   $stmt->bindParam(':email', $_POST['email']);
   $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
   $stmt->bindParam(':password', $password);
+  
   if ($stmt->execute()) {
     $message = 'Usuario creado';
   } else {

@@ -1,23 +1,25 @@
 <?php
 include('connection.php');
 
-$connect = connection();
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-$USER=$_POST['username'];
-$PASSWORD=$_POST['password'];
+$sql = "SELECT * FROM users WHERE username = :username";
 
-$consult = "SELECT * FROM users where username = '$USER' and password ='$PASSWORD'";
-$result = mysqli_query($connect, $consult);
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':username', $username);
 
-$rows = mysqli_num_rows($result);
+$stmt->execute();
 
-if($rows){
-    header("Location:home.php");
+$user = $stmt->fetch();
+
+if ($user && password_verify($password, $user['password'])) {
+    session_start();
+    $_SESSION['user_id'] = $user['id'];
+    header("Location: index.php");
+    exit();
+} else {
+    header("Location: signup.php");
+    exit();
 }
-else{
-    include("index.php");
-}
-
-mysqli_free_result($result);
-mysqli_close($connect);
 ?>

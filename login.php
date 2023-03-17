@@ -12,14 +12,21 @@ if (!empty($_POST['username']) && !empty($_POST['password'])){
 
   $message = '';
 
-  if (count($results) > 0 && password_verify($_POST['password'], $results['password'])){
-    $_SESSION['user_id'] = $results['id'];
-    header('Location: index.php');
+  if ($results && password_verify($_POST['password'], $results['password'])) {
+      $_SESSION['user_id'] = $results['id'];
+      header('Location: index.php');
+  } else {
+      $query = "SELECT * FROM users WHERE username=:username";
+      $stmt = $conn->prepare($query);
+      $stmt->execute(array(':username' => $_POST['username']));
+      $count = $stmt->rowCount();
+      
+      if ($count == 0) {
+          $message = 'Usuario no encontrado';
+      } else {
+          $message = 'Contraseña incorrecta';
+      }
   }
-  else{
-    $message = 'Usuario no encontrado';
-  }
-
 }
 
 ?>
